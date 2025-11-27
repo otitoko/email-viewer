@@ -92,7 +92,7 @@ class MainWindow(QMainWindow):
         file = self.emails[self.current_index]["filename"]
         review_pending_filepath=Path(review_pending_dir)/file
         accepted_filepath=Path(accepted_dir)/file
-        shutil.copyfile(review_pending_filepath,accepted_filepath)
+        shutil.move(review_pending_filepath,accepted_filepath)
 
         if self.current_index < len(self.emails) - 1:
             self.current_index += 1
@@ -108,15 +108,15 @@ class MainWindow(QMainWindow):
         file = self.emails[self.current_index]["filename"]
         review_pending_filepath=Path(review_pending_dir)/file
         rejected_filepath=Path(rejected_dir)/file
-        shutil.copyfile(review_pending_filepath,rejected_filepath)
+        shutil.move(review_pending_filepath,rejected_filepath)
 
         if self.current_index < len(self.emails) - 1:
             self.current_index += 1
             self.display_email(self.current_index)
         else:
             self.recipient.setText("No more emails.")
-            self.subject_label.setText("")
-            self.email_body_label.setText("")
+            self.subject.setText("")
+            self.email_body.setText("")
 
     #reading contents of json file
     def read_contents(self,file):
